@@ -4,6 +4,7 @@
 
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import parse_qs
+import os
 
 memory = []
 
@@ -53,6 +54,7 @@ class MessageHandler(BaseHTTPRequestHandler):
         self.wfile.write(mesg.encode())
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8000))   # Use PORT if it's there.
     server_address = ('', 8000)
     httpd = HTTPServer(server_address, MessageHandler)
     httpd.serve_forever()
